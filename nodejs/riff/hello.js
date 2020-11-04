@@ -1,1 +1,1 @@
-module.exports = name => `Hello ${name}
+module.exports = name => `Hello ${name}`
