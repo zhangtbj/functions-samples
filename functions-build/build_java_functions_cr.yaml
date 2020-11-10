@@ -1,0 +1,29 @@
+#*******************************************************************************
+# Licensed Materials - Property of IBM
+# IBM Cloud Code Engine, 5900-AB0
+# © Copyright IBM Corp. 2020
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#*******************************************************************************
+
+
+---
+apiVersion: build.dev/v1alpha1
+kind: Build
+metadata:
+  name: functions-java-build
+  annotations:
+    build.build.dev/build-run-deletion: "true"
+spec:
+  source:
+    url: https://github.com/projectriff/fats
+    revision: main
+    contextDir: functions/uppercase/java
+  strategy:
+    name: functions-buildpacks
+    kind: ClusterBuildStrategy
+  output:
+    image: us.icr.io/knative_jordan/functions-java
+    credentials:
+      name: icr-knbuild
+
