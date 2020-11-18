@@ -1,0 +1,19 @@
+#*******************************************************************************
+# Licensed Materials - Property of IBM
+# IBM Cloud Code Engine, 5900-AB0
+# © Copyright IBM Corp. 2020
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#*******************************************************************************
+
+
+---
+apiVersion: build.dev/v1alpha1
+kind: BuildRun
+metadata:
+  name: functions-nodejs-tutorial-buildrun
+spec:
+  buildRef:
+    name: functions-nodejs-tutorial-build
+  serviceAccount:
+    generate: true
