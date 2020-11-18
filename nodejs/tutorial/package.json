@@ -1,0 +1,12 @@
+{
+  "name": "nodejs.tutorial",
+  "version": "1.0.0",
+  "description": "Riff tutorial for Git and Slack",
+  "main": "hello.js",
+  "author": "zhangtbj <zhangtbj@cn.ibm.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "dependencies": {
+    "request": "*"
+  }
+}
