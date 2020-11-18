@@ -1,6 +1,5 @@
-const axios = require('axios')
-
 module.exports = function (params) {
+    const axios = require('axios')
     let payload = params;
     action = payload.action
     number = payload.issue.number;
