@@ -20,7 +20,7 @@ spec:
     revision: main
     contextDir: nodejs/google
   strategy:
-    name: functions-buildpacks
+    name: functions-buildpacks-medium
     kind: ClusterBuildStrategy
   output:
     image: us.icr.io/knative_jordan/functions-nodejs:google

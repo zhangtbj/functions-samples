@@ -1,0 +1,72 @@
+#*******************************************************************************
+# Licensed Materials - Property of IBM
+# IBM Cloud Code Engine, 5900-AB0
+# © Copyright IBM Corp. 2020
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#*******************************************************************************
+
+
+---
+apiVersion: build.dev/v1alpha1
+kind: ClusterBuildStrategy
+metadata:
+  name: functions-buildpacks-medium
+spec:
+  buildSteps:
+    - name: prepare
+      image: gcr.io/projectriff/builder:0.20.0
+      securityContext:
+        runAsUser: 0
+        capabilities:
+          add:
+            - CHOWN
+      command:
+        - /bin/bash
+      args:
+        - -c
+        - >
+          chown -R "1000:1000" /workspace/source &&
+          chown -R "1000:1000" /tekton/home &&
+          chown -R "1000:1000" /cache &&
+          chown -R "1000:1000" /layers
+      resources:
+        limits:
+          cpu: 100m
+          memory: 400M
+          ephemeral-storage: 400M
+        requests:
+          cpu: 100m
+          memory: 400M
+          ephemeral-storage: 400M
+      volumeMounts:
+        - name: cache-dir
+          mountPath: /cache
+        - name: layers-dir
+          mountPath: /layers
+    - name: build-and-push
+      image: gcr.io/projectriff/builder:0.20.0
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      command:
+        - /cnb/lifecycle/creator
+      args:
+        - -app=/workspace/source/$(build.source.contextDir)
+        - -cache-dir=/cache
+        - -layers=/layers
+        - $(build.output.image)
+      resources:
+        limits:
+          cpu: 960m
+          memory: 3.84G
+          ephemeral-storage: 1.84G
+        requests:
+          cpu: 960m
+          memory: 3.84G
+          ephemeral-storage: 1.84G
+      volumeMounts:
+        - name: cache-dir
+          mountPath: /cache
+        - name: layers-dir
+          mountPath: /layers
