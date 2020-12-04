@@ -15,7 +15,7 @@ metadata:
 spec:
   buildSteps:
     - name: prepare
-      image: gcr.io/projectriff/builder:0.20.0
+      image: gcr.io/projectriff/builder:0.18.0
       securityContext:
         runAsUser: 0
         capabilities:
@@ -45,7 +45,7 @@ spec:
         - name: layers-dir
           mountPath: /layers
     - name: build-and-push
-      image: gcr.io/projectriff/builder:0.20.0
+      image: gcr.io/projectriff/builder:0.18.0
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000

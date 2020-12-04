@@ -16,9 +16,9 @@ metadata:
     build.build.dev/build-run-deletion: "true"
 spec:
   source:
-    url: https://github.com/zhangtbj/functions-samples
+    url: https://github.com/projectriff/fats
     revision: main
-    contextDir: java
+    contextDir: functions/uppercase/java
   strategy:
     name: functions-buildpacks-medium
     kind: ClusterBuildStrategy
